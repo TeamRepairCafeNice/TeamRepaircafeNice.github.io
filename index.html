@@ -102,6 +102,7 @@ textarea{resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,
 .counts{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-left:auto}
 .cnt{display:flex;flex-direction:column;min-width:3.2rem}
 .cnt b{font-family:var(--f-display);font-size:1.8rem;line-height:1;font-weight:700;font-variant-numeric:tabular-nums}
+.cnt.sep{padding-left:1.2rem;border-left:1px solid color-mix(in srgb,currentColor 40%,transparent);min-width:5.5rem}
 .cnt span{font-size:.74rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
 
 /* Onglets */
@@ -274,6 +275,7 @@ td .sub{display:block;font-size:.85rem;color:var(--muted)}
       <div class="cnt"><b id="t-ok">0</b><span>OK</span></div>
       <div class="cnt"><b id="t-suivre">0</b><span>À suivre</span></div>
       <div class="cnt"><b id="t-ko">0</b><span>KO</span></div>
+      <div class="cnt sep" id="cnt-libres"><b id="t-libres">0</b><span>Réparateurs libres</span></div>
     </div>
   </section>
 
@@ -504,6 +506,9 @@ function renderStats(){
   $('#t-poids').textContent=fmtKg(st.poids);
   $('#t-attente').textContent=st.attente;$('#t-cours').textContent=st.cours;
   $('#t-ok').textContent=st.ok;$('#t-suivre').textContent=st.suivre;$('#t-ko').textContent=st.ko;
+  var pr=presentReps(s),bz=busyMap(s),libres=pr.filter(function(r){return !bz[keyOf(r)];}).length;
+  $('#t-libres').textContent=libres;
+  $('#cnt-libres').title=libres+' libre'+(libres>1?'s':'')+' sur '+pr.length+' présent'+(pr.length>1?'s':'');
   $('#b-accueil').textContent=st.attente;$('#b-atelier').textContent=st.cours;
 }
 function chips(id,items,kind){
