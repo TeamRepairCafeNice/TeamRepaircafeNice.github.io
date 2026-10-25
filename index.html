@@ -572,7 +572,7 @@ function transferSelect(v,d){
   return '<select id="t-'+v.id+'" data-f="vers"><option value="">Choisir un réparateur libre…</option>'+free.map(function(r){return '<option value="'+esc(r)+'"'+(d.vers===r?' selected':'')+'>'+esc(r)+'</option>';}).join('')+'</select>';
 }
 function repChain(v){var c=(v.transferts||[]).map(function(t){return t.de;});if(v.reparateur)c.push(v.reparateur);return c.join(' → ');}
-function renderEncours(){
+function renderEnCours(){
   var s=cur(),q=queue(s),next=q[0];
   renderSpecSelect();renderRepChips();
   $('#dl-reps').innerHTML=filteredReps(s).map(function(r){return '<option value="'+esc(r)+'">';}).join('');
@@ -614,7 +614,7 @@ function renderRapport(){
   }).join(''):'<tr><td colspan="7" style="color:var(--muted)">Aucune arrivée enregistrée pour cette session.</td></tr>';
   $('#rp-text').value=reportText(s);
 }
-function renderAll(){renderTop();renderStats();renderAccueil();renderEncours();renderRapport();}
+function renderAll(){renderTop();renderStats();renderAccueil();renderEnCours();renderRapport();}
 
 /* Rapports */
 function sortedVisits(s){return s.visits.slice().sort(function(a,b){return a.n-b.n;});}
